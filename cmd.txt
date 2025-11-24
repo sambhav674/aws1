@@ -99,3 +99,39 @@ docker rm -f nagios
 http://localhost:9090
 Username: nagiosadmin
 Password: nagios
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building the project..."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying the project..."
+            }
+        }
+    }
+}
+scripted 
+node {
+    
+    stage('Build') {
+        echo "Building the project using Scripted Pipeline..."
+    }
+    
+    stage('Test') {
+        echo "Running tests..."
+    }
+    
+    stage('Deploy') {
+        echo "Deploying the application..."
+    }
+}
+
