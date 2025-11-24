@@ -1,0 +1,101 @@
+DevOps Lab Commands: AWS EC2, Minikube, and Nagios
+1. AWS EC2 + Git + Docker Deployment
+
+# Connect to EC2
+ssh -i "mykey.pem" ubuntu@<public-ip>
+
+# Update system
+sudo apt update
+
+# Install Docker
+sudo apt-get install docker.io -y
+
+# Install Git
+sudo apt install git -y
+
+# Install Nano
+sudo apt install nano -y
+
+# Clone GitHub Repo
+git clone <github-url>
+cd <repo-name>
+ls
+
+# Create Dockerfile
+nano Dockerfile
+
+# Dockerfile content:
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+
+# Build Docker image
+sudo docker build -t mywebapp .
+
+# Run container
+sudo docker run -d -p 80:80 mywebapp
+
+# Check running containers
+sudo docker ps
+
+# Stop container
+sudo docker stop <container-id>
+
+2. Minikube Commands
+
+# Start Minikube
+minikube start
+
+# Check Minikube status
+minikube status
+
+# Create deployment
+kubectl create deployment webapp --image=nginx
+
+# Check deployments
+kubectl get deployments
+
+# Check pods
+kubectl get pods
+
+# Expose deployment
+kubectl expose deployment webapp --type=NodePort --port=80
+
+# Check services
+kubectl get svc
+
+# Open service in browser
+minikube service webapp
+
+# Delete deployment
+kubectl delete deployment webapp
+
+# Delete pod
+kubectl delete pod <pod-name>
+
+3. Nagios (Docker-based Setup)
+
+# Pull Nagios image
+docker pull jasonrivers/nagios
+
+# Run Nagios
+docker run -d --name nagios -p 9090:80 jasonrivers/nagios
+
+# Check container
+docker ps
+
+# Stop Nagios container
+docker stop nagios
+
+# Start Nagios container
+docker start nagios
+
+# Restart container
+docker restart nagios
+
+# Remove container
+docker rm -f nagios
+
+# Access Nagios UI:
+http://localhost:9090
+Username: nagiosadmin
+Password: nagios
