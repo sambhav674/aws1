@@ -66,6 +66,8 @@ kubectl get svc
 # Open service in browser
 minikube service webapp
 
+minikube start--driver = docker
+
 # Delete deployment
 kubectl delete deployment webapp
 
