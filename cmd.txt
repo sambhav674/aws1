@@ -136,4 +136,128 @@ node {
         echo "Deploying the application..."
     }
 }
+===============================
+LAB MANUAL – SOFTWARE ENGINEERING
+MAVEN JAVA PROJECT + MAVEN WEB PROJECT + DOCKER
+===============================
+
+---------------------------------------
+PART 1 — BUILD & PACKAGE A MAVEN JAVA APPLICATION
+---------------------------------------
+
+Step-1: Open Eclipse → File → New → Maven Project
+Step-2: Select "Use default Workspace" → Next
+Step-3: In the filter box type: quickstart
+Step-4: Select "maven-archetype-quickstart" → Next
+Step-5: Enter:
+        Group Id: com.example
+        Artifact Id: myapp1
+        → Finish
+Step-6: When console asks Y/N → type y and press Enter
+Step-7: Wait until BUILD SUCCESS appears
+Step-8: Open App.java and write code if needed
+Step-9: Build the project:
+        Right-click project → Run As → Maven Build
+        Goals: clean install
+        → Run
+Step-10: JAR file will be created in:
+         myapp1/target/myapp1-0.0.1-SNAPSHOT.jar
+
+Step-11: Push to GitHub
+         Right-click project → Show in Local Terminal (Git Bash)
+         Run commands:
+         git init
+         git add .
+         git commit -m "Maven Java Project"
+         git branch -M main
+         git remote add origin https://github.com/Edigirala-Neksha/se-lab-fourth
+         git push -u origin main
+
+
+---------------------------------------
+PART 2 — CREATE A MAVEN WEB APPLICATION
+---------------------------------------
+
+Step-1: File → New → Maven Project → Next
+Step-2: In filter type: webapp
+Step-3: Select "maven-archetype-webapp"
+Step-4: Enter Group Id + Artifact Id (ex: mywebapp) → Finish
+Step-5: When console asks Y → type y and press Enter
+Step-6: Wait until BUILD SUCCESS is shown
+
+Step-7: Go to:
+        src/main/webapp/index.jsp
+Step-8: Replace content with:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<body>
+<h1>Hello, this is my Maven Web Application!</h1>
+</body>
+</html>
+
+Step-9: Save the file (Ctrl + S)
+
+Step-10: Build the project:
+         Right-click project → Run As → Maven Build
+         Goals: clean install
+         → Run
+
+Step-11: WAR file will be created at:
+         mywebapp/target/mywebapp.war
+
+Step-12: Push the web project to GitHub:
+         git add .
+         git commit -m "Maven Web Project"
+         git push origin main
+
+
+---------------------------------------
+PART 3 — RUN MAVEN WEB PROJECT ON SERVER
+---------------------------------------
+
+Step-1: Right-click project → Run As → Run on Server
+Step-2: Select Apache Tomcat → Next
+Step-3: Add the project to the server → Finish
+Step-4: Browser will display:
+        "Hello, this is my Maven Web Application!"
+
+
+---------------------------------------
+PART 4 — DOCKER INSTALLATION + BASIC COMMANDS
+---------------------------------------
+
+Installing Docker:
+(Use Docker Desktop for Windows)
+
+Basic Docker CLI Commands:
+
+1. Check Docker version:
+   docker --version
+
+2. Pull Nginx image:
+   docker pull nginx
+
+3. Run Nginx container:
+   docker run -d -p 8080:80 --name mynginx nginx
+
+4. Check running containers:
+   docker ps
+
+5. Stop container:
+   docker stop mynginx
+
+6. Start container:
+   docker start mynginx
+
+7. Remove container:
+   docker rm mynginx
+
+8. Remove image:
+   docker rmi nginx
+
+---------------------------------------
+END OF LAB STEPS
+---------------------------------------
+
 
