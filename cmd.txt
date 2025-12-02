@@ -499,6 +499,162 @@ git reset --hard HEAD~1
 # Unstage a file
 git reset HEAD filename.txt
 
+### Book Bank System: Functional and Non-Functional Requirements
+
+#### **1. Functional Requirements**
+
+Functional requirements describe the specific functions and features that the system should support. For the **Book Bank System**, these can be broken down as follows:
+
+**A. User Registration and Authentication**
+
+* The system should allow users (students, faculty, staff) to create accounts and log in using a unique ID and password.
+* Authentication should include verifying credentials and providing role-based access (Student, Librarian, Admin).
+
+**B. Book Catalog Management**
+
+* The system must allow the admin to add, update, and delete book details (title, author, ISBN, quantity).
+* The catalog should display books that are available in the library, including details such as availability status, author name, and genre.
+
+**C. Borrowing and Returning Books**
+
+* Registered users (students, staff, faculty) should be able to search and borrow books.
+* The system should record the borrowing date and due date for returning the books.
+* Users should be able to return the books and update the system with the return date.
+* The system should check book availability before allowing the user to borrow it.
+
+**D. Book Reservation**
+
+* Users should be able to reserve books that are currently unavailable and be notified when they are available.
+
+**E. Notifications**
+
+* The system should notify users about overdue books or upcoming due dates through email or SMS.
+
+**F. Fine Management**
+
+* The system should calculate fines for overdue books based on the number of days past due.
+* It should allow users to view and pay fines.
+
+**G. Search Functionality**
+
+* Users should be able to search the book catalog based on various criteria such as book title, author, genre, or ISBN.
+
+**H. Reports and Analytics (Admin)**
+
+* Admins should be able to generate reports such as book borrow history, fines, and available books.
+
+#### **2. Non-Functional Requirements**
+
+Non-functional requirements define the quality attributes, system performance, and constraints that the system should meet.
+
+**A. Performance**
+
+* The system should be able to handle a high volume of users simultaneously, especially during peak hours like exam periods.
+* Response time for searching books and checking availability should be under 2 seconds.
+
+**B. Scalability**
+
+* The system should be scalable to accommodate a growing number of users and books over time.
+
+**C. Availability**
+
+* The system should be available 24/7 with minimal downtime, ensuring continuous access to book-related services.
+
+**D. Security**
+
+* The system must implement secure login mechanisms (e.g., encryption of passwords, HTTPS).
+* Users should only have access to data relevant to their roles (e.g., students shouldn't be able to modify the book catalog).
+
+**E. Usability**
+
+* The interface should be intuitive and user-friendly, allowing users to quickly find books, borrow, and return them.
+* The system should provide help and support in case of issues.
+
+**F. Backup and Recovery**
+
+* The system should periodically back up data to prevent data loss.
+* It should include a disaster recovery plan to restore the system in case of failures.
+
+**G. Compliance**
+
+* The system should comply with relevant standards and regulations such as data protection laws.
+
+---
+
+### **Sequence Diagram for Book Bank System (in UML)**
+
+Now, let's create a **sequence diagram** to represent the flow of operations for borrowing a book in the Book Bank System.
+
+Here are the main **actors** and **objects** involved:
+
+* **Actor:** User (Student, Faculty, Staff)
+* **Actor:** Admin (for catalog management)
+* **Objects:** System, Book Catalog, Notification Service, Fine System
+
+#### **Use Case: Borrowing a Book**
+
+1. **User** logs in to the system.
+2. The **System** validates the credentials.
+3. The **User** searches for the desired book from the **Book Catalog**.
+4. The **System** checks the availability of the book.
+
+   * If the book is available:
+
+     * The **User** requests to borrow the book.
+     * The **System** updates the book status to "borrowed" and records the borrowing date.
+     * The **System** assigns a due date.
+     * The **System** sends a notification to the **User** about the borrowing and due date.
+5. If the book is unavailable:
+
+   * The **System** informs the **User** and asks if they would like to reserve the book.
+   * If the **User** opts to reserve the book, the **System** updates the reservation list.
+
+#### **Sequence Diagram**
+
+Below is the textual representation of the sequence diagram for borrowing a book:
+
+```plaintext
+Participant: User
+Participant: System
+Participant: Book Catalog
+Participant: Notification Service
+Participant: Fine System
+
+User -> System: Login request
+System -> System: Validate credentials
+System -> User: Login success/failure
+
+User -> Book Catalog: Search for book
+Book Catalog -> System: Check availability
+
+alt Book available
+    System -> Book Catalog: Reserve book (borrow)
+    Book Catalog -> System: Update status to borrowed
+    System -> Fine System: Record borrowing date, due date
+    System -> Notification Service: Send notification (due date)
+    Notification Service -> User: Notify borrowing info (due date)
+else Book unavailable
+    System -> User: Book not available
+    User -> System: Reserve book request
+    System -> Book Catalog: Reserve book
+    Book Catalog -> System: Update reservation status
+end
+```
+
+#### **Explanation:**
+
+* The **User** logs in to the **System**.
+* After successful login, the **User** searches for a book from the **Book Catalog**.
+* The **System** checks if the book is available.
+* If the book is available, the **System** updates the book’s status and sends a notification to the **User**.
+* If the book is unavailable, the **System** allows the **User** to reserve it.
+
+This is just one of many scenarios in the system. You can create similar sequence diagrams for other actions like returning a book, paying fines, or generating reports.
+
+Let me know if you need more detail or further modifications!
+
+
+
 ----------------------------------------------------------
 END OF TASK 3 COMMAND SET
 ----------------------------------------------------------
